@@ -1,4 +1,4 @@
-export default [
+const options = [
   {
     label: 'Item 01',
     value: '01',
@@ -21,3 +21,5 @@ export default [
     description: 'Dolore voluptate amet officia irure ea esse ut.',
   },
 ];
+
+export default options;

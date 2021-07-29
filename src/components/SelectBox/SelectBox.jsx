@@ -42,7 +42,7 @@ const SelectBox = ({ label, placeholder, size, width, options }) => {
       >
         {isVisible ? (
           <ul>
-            {filteredOptions.length == 0 ? (
+            {filteredOptions.length === 0 ? (
               <li>No options.</li>
             ) : (
               filteredOptions.map((info) => {
