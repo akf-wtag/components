@@ -1,0 +1,151 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+div {
+  .size-small {
+    height: 40px !important;
+  }
+
+  .size-large {
+    height: 48px !important;
+  }
+
+  .width-small {
+    width: 300px !important;
+  }
+
+  .width-large {
+    width: 450px !important;
+  }
+
+  label {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .selectBox-container {
+    position: relative;
+    border: 1px solid #dbe2f1;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(75, 115, 167, 0.16);
+    width: 150px;
+    height: 34px;
+
+    ul {
+      background-color: white;
+      list-style-type: none;
+      margin: 0;
+      padding: 10px;
+      width: 100%;
+      position: absolute;
+      top: 40px;
+      border: 1px solid #dbe2f1;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(75, 115, 167, 0.16);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      li {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-around;
+
+        .smile {
+          width: 20px;
+          height: 20px;
+          flex: 0 0 20px;
+        }
+
+        .smile-width-small {
+          width: 26px;
+          height: 26px;
+          flex: 0 0 26px;
+        }
+
+        .smile-width-large {
+          width: 32px;
+          height: 32px;
+          flex: 0 0 32px;
+        }
+
+        .option-content {
+          flex: 0 0 100px;
+
+          .option-title {
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 6px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+          }
+          .option-description {
+            font-size: 12px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: rgb(70, 67, 67);
+          }
+
+          .option-title-width-small {
+            font-size: 16px;
+          }
+
+          .option-title-width-large {
+            font-size: 18px;
+          }
+        }
+
+        .option-content-width-small {
+          flex: 0 0 244px;
+        }
+
+        .option-content-width-large {
+          flex: 0 0 388px;
+        }
+      }
+    }
+
+    .input-container {
+      position: absolute;
+      width: 100%;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      input {
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        font-size: 12px;
+        border: none;
+        padding-left: 15px;
+      }
+
+      .caret-down {
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        margin-right: 5px;
+      }
+
+      input:focus {
+        outline: none;
+      }
+
+      .input-size-small {
+        font-size: 14px !important;
+      }
+
+      .input-size-large {
+        font-size: 16px !important;
+      }
+    }
+  }
+}
