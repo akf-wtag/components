@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import './SelectBox.scss';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { FiSmile } from 'react-icons/fi';
 import PropTypes from 'prop-types';
@@ -11,15 +11,27 @@ const SelectBox = ({ label, placeholder, size, width, options }) => {
     return '';
   };
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [text, setText] = useState('');
-  const inputRef = useRef();
+  const ref = useRef();
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', checkIfClickedOutside);
+    return () => {
+      document.removeEventListener('mousedown', checkIfClickedOutside);
+    };
+  }, [isMenuOpen]);
 
   const handleChange = (e) => setText(e.target.value);
 
   const handleVisible = (e) => {
-    setIsVisible((prev) => {
-      if (!prev) inputRef.current.focus();
+    setIsMenuOpen((prev) => {
+      if (!prev) ref.current.focus();
       return !prev;
     });
   };
@@ -39,10 +51,8 @@ const SelectBox = ({ label, placeholder, size, width, options }) => {
       ${generateClassName('size', size)}
       ${generateClassName('width', width)} `}
         id='selectBox-container'
-        // onBlur={() => setIsVisible(false)}
-        onFocus={() => setIsVisible(true)}
       >
-        {isVisible ? (
+        {isMenuOpen && (
           <ul className={generateClassName('ul-size', size)}>
             {filteredOptions.length === 0 ? (
               <li>No options.</li>
@@ -54,7 +64,7 @@ const SelectBox = ({ label, placeholder, size, width, options }) => {
                     key={uuid()}
                     onClick={() => {
                       setText(label);
-                      inputRef.current.focus();
+                      ref.current.focus();
                     }}
                   >
                     <FiSmile
@@ -91,10 +101,8 @@ const SelectBox = ({ label, placeholder, size, width, options }) => {
               })
             )}
           </ul>
-        ) : (
-          ''
         )}
-        <div className='input-container'>
+        <div className='input-container' action=''>
           <input
             type='text'
             placeholder={placeholder}
@@ -102,9 +110,10 @@ const SelectBox = ({ label, placeholder, size, width, options }) => {
             onChange={handleChange}
             autoComplete='off'
             className={`${generateClassName('input-size', size)}`}
-            ref={inputRef}
+            ref={ref}
+            onFocus={() => setIsMenuOpen(true)}
           />
-          {isVisible ? (
+          {isMenuOpen ? (
             <AiFillCaretUp className='caret-down' onClick={handleVisible} />
           ) : (
             <AiFillCaretDown className='caret-down' onClick={handleVisible} />
